@@ -29,6 +29,6 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   round(meanValue,3)
 }
 
-print(pollutantmean("specdata", "sulfate", 1:10))
-print(pollutantmean("specdata", "nitrate", 70:72))
-print(pollutantmean("specdata", "nitrate", 23))
+#print(pollutantmean("specdata", "sulfate", 1:10))
+#print(pollutantmean("specdata", "nitrate", 70:72))
+#print(pollutantmean("specdata", "nitrate", 23))
