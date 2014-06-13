@@ -13,7 +13,7 @@ corr <- function(directory, threshold = 0) {
   
   ret <- vector()
   pos <- 1
-  #observCount <- complete("specdata", 1:332)
+  observCount <- complete("specdata", 1:332)
   thresholdArr = observCount["id"][observCount["nobs"] >= threshold]
   for(csv in thresholdArr) {
     file <- sprintf("./%s/%03d.csv", directory, csv)
@@ -27,6 +27,7 @@ corr <- function(directory, threshold = 0) {
   ret
 }
 
+if(FALSE) {
 cr <- corr("specdata", 150)
 print(head(cr))
 print(summary(cr))
@@ -42,3 +43,4 @@ print(length(cr))
 cr <- corr("specdata")
 print(summary(cr))
 print(length(cr))
+}
