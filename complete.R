@@ -12,4 +12,20 @@ complete <- function(directory, id = 1:332) {
   ## ...
   ## where 'id' is the monitor ID number and 'nobs' is the
   ## number of complete cases
+  df <- data.frame()
+  for(i in id) {
+    file <- sprintf("./%s/%03d.csv", directory, i)
+    table <- read.csv(file)
+    test = !is.na(table["sulfate"]) & !is.na(table["nitrate"])
+    df <- rbind(df, c(i, sum(test)))
+  }
+  if(nrow(df) > 0) {
+    names(df) <- c("id", "nobs")
+  }
+  df
 }
+
+print(complete("specdata", 1))
+print(complete("specdata", c(2, 4, 8, 10, 12)))
+print(complete("specdata", 30:25))
+print(complete("specdata", 3))
