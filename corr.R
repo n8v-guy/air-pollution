@@ -1,3 +1,5 @@
+source("complete.R")
+
 corr <- function(directory, threshold = 0) {
   ## 'directory' is a character vector of length 1 indicating
   ## the location of the CSV files
@@ -9,3 +11,19 @@ corr <- function(directory, threshold = 0) {
   
   ## Return a numeric vector of correlations
 }
+
+cr <- corr("specdata", 150)
+head(cr)
+summary(cr)
+
+cr <- corr("specdata", 400)
+head(cr)
+summary(cr)
+
+cr <- corr("specdata", 5000)
+summary(cr)
+length(cr)
+
+cr <- corr("specdata")
+summary(cr)
+length(cr)
