@@ -12,20 +12,21 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
   
-  resultVector <- vector(mode="numeric")
-  pos <- 1
+  table <- TRUE
   for(i in id) {
     file <- sprintf("./%s/%03d.csv", directory, i)
-    table <- read.csv(file)
-    tableColumn <- table[pollutant]
-    tableColumnValid <- !is.na(table["sulfate"]) & !is.na(table["nitrate"])
-    cleanTableColumn <- tableColumn[tableColumnValid];
-    meanValue <- mean(cleanTableColumn)
-    resultVector[pos] <- meanValue
-    pos <- pos + 1
+    fileData <- read.csv(file)
+    if(typeof(table) == "logical") {
+      table <- fileData
+    } else {
+      table <- rbind(table, fileData)      
+    }
   }
-  resultMean <- mean(resultVector)
-  round(resultMean,3)
+  tableColumn <- table[pollutant]
+  tableColumnValid <- !is.na(tableColumn)
+  cleanTableColumn <- tableColumn[tableColumnValid];
+  meanValue <- mean(cleanTableColumn)
+  round(meanValue,3)
 }
 
 print(pollutantmean("specdata", "sulfate", 1:10))
